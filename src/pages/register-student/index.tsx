@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -8,82 +8,62 @@ import {
   SafeAreaView,
   StatusBar,
   Alert,
-} from 'react-native';
-import CustomTextInput from '../../components/custom-text-input'; 
-import CustomButton from '../../components/custom-button';  
-import { useNavigation } from '@react-navigation/native';
-import { api } from '../../../services/api';
+} from 'react-native'
+import CustomTextInput from '../../components/custom-text-input'
+import CustomButton from '../../components/custom-button'
+import { useNavigation } from '@react-navigation/native'
+import { api } from '../../../services/api'
 
-export type UserRole = 'student' | 'supervisor';
+export type UserRole = 'student' | 'supervisor'
 
 const RegisterStudent: React.FC = () => {
-  const [role, setRole] = useState<UserRole>('student');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [inviteCode, setInviteCode] = useState('');
+  const [role, setRole] = useState<UserRole>('student')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [inviteCode, setInviteCode] = useState('')
 
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   const handleRegister = async () => {
     console.log('aaaa')
 
-    const body = {name, email, password, type : 'STUDENT'}
-    try{
-      const response = await api.post('/users/', body);
+    const body = { name, email, password, type: 'STUDENT' }
+    try {
+      const response = await api.post('/users/', body)
 
-
-        console.log(response)
-        if(response.status === 200){
-          Alert.alert(
-            "Registro",
-            "Usuário criado com sucesso!",
-            [
-              {text : 'Ok'}
-            ]
-          )
-        }
-    }
-    catch(err){
+      console.log(response)
+      if (response.status === 200) {
+        Alert.alert('Registro', 'Usuário criado com sucesso!', [{ text: 'Ok' }])
+      }
+    } catch (err) {
       console.log(err)
     }
-    
-  };
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle='dark-content' />
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.headerTitle}>MeuEstagio.app</Text>
-        
+
         <View style={styles.formContainer}>
           <Text style={styles.title}>Crie sua conta</Text>
-          <Text style={styles.subtitle}>
-            Selecione o seu perfil para iniciar o cadastro.
-          </Text>
-
-          {/* Seletor de Perfil */}
+          <Text style={styles.subtitle}>Selecione o seu perfil para iniciar o cadastro.</Text>
           <View style={styles.roleSelector}>
             <TouchableOpacity
-              style={[
-                styles.roleButton,
-                role === 'student' && styles.roleButtonActive,
-              ]}
+              style={[styles.roleButton, role === 'student' && styles.roleButtonActive]}
               onPress={() => navigation.navigate('RegisterStudent')}>
-              <Text style={[
-                  styles.roleButtonText,
-                  role === 'student' && styles.roleButtonTextActive,
-                ]}>
+              <Text
+                style={[styles.roleButtonText, role === 'student' && styles.roleButtonTextActive]}>
                 Sou Estudante
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[
-                styles.roleButton,
-                role === 'supervisor' && styles.roleButtonActive,
-              ]}
+              style={[styles.roleButton, role === 'supervisor' && styles.roleButtonActive]}
               onPress={() => navigation.navigate('RegisterSupervisor')}>
-              <Text style={[
+              <Text
+                style={[
                   styles.roleButtonText,
                   role === 'supervisor' && styles.roleButtonTextActive,
                 ]}>
@@ -92,35 +72,34 @@ const RegisterStudent: React.FC = () => {
             </TouchableOpacity>
           </View>
 
-          {/* Campos do Formulário */}
           <CustomTextInput
-            label="Nome Completo"
-            placeholder="Digite seu nome completo"
+            label='Nome Completo'
+            placeholder='Digite seu nome completo'
             value={name}
             onChangeText={setName}
           />
           <CustomTextInput
-            label="Email"
-            placeholder="seuemail@exemplo.com"
+            label='Email'
+            placeholder='seuemail@exemplo.com'
             value={email}
             onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
+            keyboardType='email-address'
+            autoCapitalize='none'
           />
           <CustomTextInput
-            label="Criar Senha"
-            placeholder="Crie uma senha segura"
+            label='Criar Senha'
+            placeholder='Crie uma senha segura'
             value={password}
             onChangeText={setPassword}
-            secureTextEntry // Esconde a senha
+            secureTextEntry
           />
           <CustomTextInput
-            label="Código de Convite da Organização"
-            placeholder="Insira o código de convite"
+            label='Código de Convite da Organização'
+            placeholder='Insira o código de convite'
             value={inviteCode}
             onChangeText={setInviteCode}
           />
-          
+
           <CustomButton
             title={role === 'student' ? 'Cadastrar Estudante' : 'Cadastrar Supervisor'}
             onPress={handleRegister}
@@ -136,8 +115,8 @@ const RegisterStudent: React.FC = () => {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -214,6 +193,6 @@ const styles = StyleSheet.create({
     color: '#007BFF',
     fontWeight: 'bold',
   },
-});
+})
 
-export default RegisterStudent;
+export default RegisterStudent
