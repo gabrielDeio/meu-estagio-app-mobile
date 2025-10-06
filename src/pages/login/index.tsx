@@ -8,7 +8,7 @@ import CustomButton from '../../components/custom-button'
 import { styles } from './style'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const LoginNew: React.FC = () => {
+const Login: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigation = useNavigation()
@@ -65,4 +65,4 @@ const LoginNew: React.FC = () => {
   )
 }
 
-export default LoginNew
+export default Login

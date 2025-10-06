@@ -1,18 +1,17 @@
 export type RootStackParamList = {
-  WelcomeScreen: undefined;
-  RegisterStudent : undefined;
-  RegisterSupervisor : undefined;
-  LoginNew : undefined;
+  WelcomeScreen: undefined
+  RegisterStudent: undefined
+  RegisterSupervisor: undefined
+  Login: undefined
   Details: {
-    id: string;
-    title?: string;
-  };
+    id: string
+    title?: string
+  }
   Profile: {
-    userId: string;
-  };
-  Settings: undefined;
-};
-
+    userId: string
+  }
+  Settings: undefined
+}
 
 declare global {
   namespace ReactNavigation {
