@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, ScrollView, StatusBar, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, StatusBar, TextInput, Alert } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 import CustomTextInput from '../../components/custom-text-input'
@@ -8,6 +8,7 @@ import { UserRole } from '../register-student'
 import { useNavigation } from '@react-navigation/native'
 import { styles } from './style'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { api } from '../../../services/api'
 
 const RegisterSupervisor: React.FC = () => {
   const [name, setName] = useState('')
@@ -19,13 +20,18 @@ const RegisterSupervisor: React.FC = () => {
   const navigation = useNavigation()
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
-  const handleRegister = () => {
-    console.log({
-      name,
-      email,
-      password,
-      organizationName,
-    })
+  const handleRegister = async () => {
+    const body = { name, email, password, organizationName, type: 'SUPERVISOR' }
+
+    try {
+      const response = await api.post('/users/', body)
+      if (response.status === 200) {
+        Alert.alert('Registro', 'Usuário criado com sucesso!', [{ text: 'Ok' }])
+      }
+    } catch (err) {
+      console.log(err)
+      Alert.alert('Erro', 'Erro ao criar usuário', [{ text: 'Ok' }])
+    }
   }
 
   return (
