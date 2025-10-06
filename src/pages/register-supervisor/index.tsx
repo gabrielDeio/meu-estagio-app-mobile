@@ -1,14 +1,5 @@
 import React, { useState } from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  SafeAreaView,
-  StatusBar,
-  TextInput,
-} from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, StatusBar, TextInput } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 import CustomTextInput from '../../components/custom-text-input'
@@ -16,6 +7,7 @@ import CustomButton from '../../components/custom-button'
 import { UserRole } from '../register-student'
 import { useNavigation } from '@react-navigation/native'
 import { styles } from './style'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const RegisterSupervisor: React.FC = () => {
   const [name, setName] = useState('')
