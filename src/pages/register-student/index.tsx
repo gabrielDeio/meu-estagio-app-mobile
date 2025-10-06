@@ -19,13 +19,10 @@ const RegisterStudent: React.FC = () => {
   const navigation = useNavigation()
 
   const handleRegister = async () => {
-    console.log('aaaa')
-
     const body = { name, email, password, type: 'STUDENT' }
     try {
       const response = await api.post('/users/', body)
 
-      console.log(response)
       if (response.status === 200) {
         Alert.alert('Registro', 'Usuário criado com sucesso!', [{ text: 'Ok' }])
       }
