@@ -67,7 +67,7 @@ Após rodar o comando acima, use o **QR Code** no terminal ou no navegador para 
 Para que o aplicativo funcione corretamente, é necessário que o **Backend** esteja em execução.
 Você pode encontrar o repositório do backend aqui:
 
-👉 [Repositório do Backend](https://github.com/seu-usuario/backend-repositorio)
+👉 [Repositório do Backend](https://github.com/gabrielDeio/meu-estagio-app-backend)
 
 ---
 
