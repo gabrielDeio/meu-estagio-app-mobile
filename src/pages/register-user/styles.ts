@@ -1,14 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#F5F5F5', 
+    backgroundColor: '#F5F5F5',
   },
   container: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    padding: 30,
+    paddingHorizontal: 20,
   },
   headerTitle: {
     fontSize: 20,
@@ -16,31 +14,20 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 20,
   },
+  formContainer: {
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
   subtitle: {
     fontSize: 16,
     color: 'gray',
     marginBottom: 30,
     textAlign: 'center',
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#333',
-    textAlign: 'center',
-    marginBottom: 40,
-  },
-  form: {
-    width: '100%',
-  },
-  inputContainer: {
-    width: '100%',
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 8,
-    fontWeight: '500',
   },
   roleSelector: {
     flexDirection: 'row',
@@ -66,25 +53,8 @@ export const styles = StyleSheet.create({
   roleButtonTextActive: {
     color: '#FFF',
   },
-  passwordInputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#DDD',
-    borderRadius: 8,
-  },
-  passwordInput: {
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
-    fontSize: 16,
-  },
-  eyeIcon: {
-    padding: 10,
-  },
   submitButton: {
-    backgroundColor: '#0D6EFD', 
+    backgroundColor: '#007BFF',
     width: '100%',
     padding: 15,
     borderRadius: 8,
@@ -96,11 +66,13 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  loginLink: {
+  loginLinkText: {
     marginTop: 20,
     fontSize: 16,
-    color: '#0D6EFD',
-    textAlign: 'center',
+    color: 'gray',
+  },
+  loginLink: {
+    color: '#007BFF',
     fontWeight: 'bold',
   },
-});
+})

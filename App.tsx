@@ -2,10 +2,9 @@ import { StyleSheet } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import RegisterStudent from './src/pages/register-student'
+import RegisterUser from './src/pages/register-user'
 
 import { RootStackParamList } from './src/types/navigations'
-import RegisterSupervisor from './src/pages/register-supervisor'
 import Login from './src/pages/login'
 import WelcomeScreen from './src/pages/welcome-screen'
 
@@ -16,8 +15,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='WelcomeScreen'>
         <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
-        <Stack.Screen name='RegisterStudent' component={RegisterStudent} />
-        <Stack.Screen name='RegisterSupervisor' component={RegisterSupervisor} />
+        <Stack.Screen name='RegisterUser' component={RegisterUser} />
         <Stack.Screen name='Login' component={Login} />
       </Stack.Navigator>
     </NavigationContainer>

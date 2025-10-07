@@ -55,7 +55,7 @@ const Login: React.FC = () => {
 
         <TouchableOpacity
           style={styles.signupContainer}
-          onPress={() => navigation.navigate('RegisterStudent')}>
+          onPress={() => navigation.navigate('RegisterUser')}>
           <Text style={styles.signupText}>
             Não tem uma conta? <Text style={styles.signupLink}>Cadastre-se</Text>
           </Text>

@@ -1,7 +1,6 @@
 export type RootStackParamList = {
   WelcomeScreen: undefined
-  RegisterStudent: undefined
-  RegisterSupervisor: undefined
+  RegisterUser: undefined
   Login: undefined
   Details: {
     id: string
