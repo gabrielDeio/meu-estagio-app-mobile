@@ -80,4 +80,5 @@ Você pode encontrar o repositório do backend aqui:
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido para fins educacionais e não possui licença comercial.
+Este projeto está licenciado sob a MIT License.
+Isso significa que você pode usar, copiar, modificar, fundir, publicar, distribuir e vender cópias do software, desde que mantenha o aviso de direitos autorais original.
