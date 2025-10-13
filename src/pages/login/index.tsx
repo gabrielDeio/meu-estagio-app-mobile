@@ -1,20 +1,38 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, StatusBar } from 'react-native'
+import { View, Text, TouchableOpacity, StatusBar, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-
+import { Picker } from '@react-native-picker/picker'
 import CustomTextInput from '../../components/custom-text-input'
 ;('')
 import CustomButton from '../../components/custom-button'
 import { styles } from './style'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { AuthService } from '../../../services/auth-service'
+import { LoginDto } from '../../dto/login.dto'
+import { AccountTypeEnum } from '../../dto/register-user.dto'
+
+const userTypes = [
+  { label: 'Aluno', value: AccountTypeEnum.STUDENT },
+  { label: 'Supervisor', value: AccountTypeEnum.SUPERVISOR },
+]
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [type, setType] = useState(userTypes[0].value)
   const navigation = useNavigation()
 
-  const handleLogin = () => {
-    console.log({ email, password })
+  const handleLogin = async () => {
+    if (!type) {
+      Alert.alert('Por favor, selecione um tipo de usuários')
+      return
+    }
+
+    const body: LoginDto = { email, password, type }
+
+    const res = await AuthService.login(body)
+
+    if (res.status === 200) Alert.alert(`Sucesso no login.\nToken : ${res.data.access_token}`)
   }
 
   return (
@@ -40,6 +58,12 @@ const Login: React.FC = () => {
             onChangeText={setPassword}
             secureTextEntry
           />
+
+          <Picker selectedValue={type} onValueChange={(value) => setType(value)}>
+            {userTypes.map((item, index) => (
+              <Picker.Item key={index} label={item.label} value={item.value} />
+            ))}
+          </Picker>
 
           <CustomButton
             title='Entrar'
