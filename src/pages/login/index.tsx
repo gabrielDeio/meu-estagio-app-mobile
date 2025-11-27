@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { AuthService } from '../../../services/auth-service'
 import { LoginDto } from '../../dto/login.dto'
 import { AccountTypeEnum } from '../../dto/register-user.dto'
+import { useAuth } from '../../contexts/auth-context'
 
 const userTypes = [
   { label: 'Aluno', value: AccountTypeEnum.STUDENT },
@@ -21,6 +22,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('')
   const [type, setType] = useState(userTypes[0].value)
   const navigation = useNavigation()
+  const { signIn } = useAuth()
 
   const handleLogin = async () => {
     if (!type) {
@@ -28,11 +30,13 @@ const Login: React.FC = () => {
       return
     }
 
-    const body: LoginDto = { email, password, type }
-
-    const res = await AuthService.login(body)
-
-    if (res.status === 200) Alert.alert(`Sucesso no login.\nToken : ${res.data.access_token}`)
+    try {
+      await signIn(email, password, type)
+      navigation.navigate('HomeScreen')
+    } catch (error) {
+      Alert.alert('Erro ao logar')
+      console.log(error)
+    }
   }
 
   return (

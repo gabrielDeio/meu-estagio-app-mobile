@@ -2,6 +2,7 @@ export type RootStackParamList = {
   WelcomeScreen: undefined
   RegisterUser: undefined
   Login: undefined
+  HomeScreen: undefined
   Details: {
     id: string
     title?: string
