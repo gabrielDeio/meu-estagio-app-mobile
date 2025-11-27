@@ -7,18 +7,23 @@ import RegisterUser from './src/pages/register-user'
 import { RootStackParamList } from './src/types/navigations'
 import Login from './src/pages/login'
 import WelcomeScreen from './src/pages/welcome-screen'
+import HomeScreen from './src/pages/home-screen'
+import { AuthProvider } from './src/contexts/auth-context'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='WelcomeScreen'>
-        <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
-        <Stack.Screen name='RegisterUser' component={RegisterUser} />
-        <Stack.Screen name='Login' component={Login} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='WelcomeScreen'>
+          <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
+          <Stack.Screen name='RegisterUser' component={RegisterUser} />
+          <Stack.Screen name='Login' component={Login} />
+          <Stack.Screen name='HomeScreen' component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   )
 }
 
