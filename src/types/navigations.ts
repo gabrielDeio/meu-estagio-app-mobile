@@ -5,6 +5,7 @@ export type RootStackParamList = {
   HomeScreen: undefined
   ActivitiesScreen: undefined
   RegisterActivityScreen: undefined
+  OrganizationScreen: undefined
   Details: {
     id: string
     title?: string
