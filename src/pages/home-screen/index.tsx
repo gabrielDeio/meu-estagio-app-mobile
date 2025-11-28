@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native'
 import { MaterialIcons } from '@react-native-vector-icons/material-icons'
 import styles from './styles'
 import { useAuth } from '../../contexts/auth-context'
@@ -17,7 +17,7 @@ interface Stats {
 }
 
 export default function HomeScreen() {
-  const { authData } = useAuth()
+  const { authData, signOut } = useAuth()
   const navigation = useNavigation()
   const [stats, setStats] = React.useState<Stats>({
     registeredActivities: 0,
@@ -50,6 +50,33 @@ export default function HomeScreen() {
       totalHours,
       pendingActivities,
     }
+  }
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Sair da Conta',
+      'Tem certeza que deseja fazer logout?',
+      [
+        // Botão Cancelar (opcional)
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        // Botão Confirmar (chama o logout)
+        {
+          text: 'Sair',
+          style: 'destructive',
+          onPress: async () => {
+            // Chama a função de logout do contexto de autenticação
+            signOut()
+            navigation.navigate('Login')
+            // O contexto de autenticação deve lidar com a navegação para a tela de Login
+            // Caso contrário, adicione: navigation.replace('Login');
+          },
+        },
+      ],
+      { cancelable: true },
+    )
   }
 
   const updateMetrics = async () => {
@@ -89,7 +116,7 @@ export default function HomeScreen() {
         <Text style={styles.headerTitle}>Home</Text>
 
         <TouchableOpacity style={styles.settingsButton}>
-          <MaterialIcons name='settings' size={28} color='#000' />
+          <MaterialIcons name='logout' size={28} color='#000' onPress={() => handleLogout()} />
         </TouchableOpacity>
       </View>
 
