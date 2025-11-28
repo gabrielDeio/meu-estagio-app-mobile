@@ -32,7 +32,12 @@ const Login: React.FC = () => {
 
     try {
       await signIn(email, password, type)
-      navigation.navigate('HomeScreen')
+      if (type === AccountTypeEnum.STUDENT) {
+        navigation.navigate('HomeScreen')
+        return
+      }
+
+      navigation.navigate('OrganizationScreen')
     } catch (error) {
       Alert.alert('Erro ao logar')
       console.log(error)
