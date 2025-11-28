@@ -21,7 +21,7 @@ interface TabItem {
 
 const TABS: TabItem[] = [
   { name: 'Home', icon: 'home', route: 'HomeScreen' },
-  { name: 'Atividades', icon: 'list-alt', route: 'ActivitiesScreen' }, // Ajuste o nome da rota
+  { name: 'Atividades', icon: 'list-alt', route: 'ActivitiesScreen' },
   { name: 'Perfil', icon: 'person', route: 'ProfileScreen' },
 ]
 
