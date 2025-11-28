@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Activity, ActivityStatus } from '../../dto/activity.dto'
 import { UserWithoutPassword } from '../../types/auth'
 import { OrganizationService } from '../../../services/organization-service'
+import CustomTabBar from '../../components/custom-tab'
 
 interface Stats {
   registeredActivities: number
@@ -128,22 +129,7 @@ export default function HomeScreen() {
         </View>
       </ScrollView>
 
-      <View style={styles.footer}>
-        <TouchableOpacity style={[styles.navItem, styles.navItemActive]}>
-          <MaterialIcons name='home' size={26} color='#1173d4' />
-          <Text style={[styles.navText, { color: '#1173d4' }]}>Home</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons name='list-alt' size={26} color='#666' />
-          <Text style={styles.navText}>Atividades</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons name='person' size={26} color='#666' />
-          <Text style={styles.navText}>Perfil</Text>
-        </TouchableOpacity>
-      </View>
+      <CustomTabBar activeTab='Home' />
     </View>
   )
 }
