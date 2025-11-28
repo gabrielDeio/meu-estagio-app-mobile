@@ -20,3 +20,12 @@ export interface getAllActivitiesDto {
   userId: string
   orgId: string
 }
+
+export interface createActivityDto {
+  name: string
+  description: string
+  start_time: string
+  end_time: string
+  user_id: string
+  org_id: string
+}

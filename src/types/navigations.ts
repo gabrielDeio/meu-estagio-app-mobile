@@ -3,6 +3,8 @@ export type RootStackParamList = {
   RegisterUser: undefined
   Login: undefined
   HomeScreen: undefined
+  ActivitiesScreen: undefined
+  RegisterActivityScreen: undefined
   Details: {
     id: string
     title?: string
