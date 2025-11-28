@@ -6,6 +6,8 @@ import { useAuth } from '../../contexts/auth-context'
 import { ActivityService } from '../../../services/activity-service'
 import { useNavigation } from '@react-navigation/native'
 import { Activity, ActivityStatus } from '../../dto/activity.dto'
+import { UserWithoutPassword } from '../../types/auth'
+import { OrganizationService } from '../../../services/organization-service'
 
 interface Stats {
   registeredActivities: number
@@ -21,6 +23,7 @@ export default function HomeScreen() {
     totalHours: 0,
     pendingActivities: 0,
   })
+  const [supervisor, setSupervisor] = React.useState<UserWithoutPassword>()
 
   function calculateActivityStats(activities: Activity[]): Stats {
     let totalHours = 0
@@ -58,6 +61,9 @@ export default function HomeScreen() {
       userId: authData?.user.id,
       orgId: authData?.org_id,
     })
+
+    const orgSupervisor = await OrganizationService.getOrgSupervisor(authData?.org_id)
+    setSupervisor(orgSupervisor)
 
     if (activities.length === 0) {
       return
@@ -115,7 +121,9 @@ export default function HomeScreen() {
 
           <View>
             <Text style={styles.orgName}>{organizacao.nome}</Text>
-            <Text style={styles.orgSupervisor}>Supervisor: {organizacao.supervisor}</Text>
+            <Text style={styles.orgSupervisor}>
+              Supervisor: {`${supervisor?.name} ${supervisor?.surname}`}
+            </Text>
           </View>
         </View>
       </ScrollView>

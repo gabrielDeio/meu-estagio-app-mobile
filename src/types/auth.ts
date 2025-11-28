@@ -7,6 +7,14 @@ export interface User {
   type: AccountTypeEnum
 }
 
+export interface UserWithoutPassword {
+  id: string
+  name: string
+  surname: string
+  email: string
+  type: AccountTypeEnum
+}
+
 export interface AuthData {
   token: string
   user: User
