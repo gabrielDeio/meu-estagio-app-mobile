@@ -57,21 +57,16 @@ export default function HomeScreen() {
       'Sair da Conta',
       'Tem certeza que deseja fazer logout?',
       [
-        // Botão Cancelar (opcional)
         {
           text: 'Cancelar',
           style: 'cancel',
         },
-        // Botão Confirmar (chama o logout)
         {
           text: 'Sair',
           style: 'destructive',
           onPress: async () => {
-            // Chama a função de logout do contexto de autenticação
             signOut()
             navigation.navigate('Login')
-            // O contexto de autenticação deve lidar com a navegação para a tela de Login
-            // Caso contrário, adicione: navigation.replace('Login');
           },
         },
       ],
