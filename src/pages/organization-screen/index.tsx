@@ -1,21 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@expo/vector-icons'
 import { styles } from './styles'
 import { useNavigation } from '@react-navigation/native'
 import CustomSupervisorTabBar from '../../components/custom-supervisor-tab'
+import { useAuth } from '../../contexts/auth-context'
+import { OrganizationService } from '../../../services/organization-service'
+import * as Clipboard from 'expo-clipboard'
 
-const mockOrganization = {
-  name: 'Tech Solutions Inc.',
-  inviteCode: 'XYZ123',
+export interface OrganizationData {
+  id: string
+  name: string
+  code: string
+  supervisor_max_amount: number
+  cnpj: string
 }
 
 const OrganizationScreen: React.FC = () => {
   const navigation = useNavigation()
+  const [organization, setOrganization] = useState<OrganizationData | null>(null)
+  const { authData } = useAuth()
+
+  const fetchOrganizationData = async () => {
+    if (!authData) {
+      navigation.navigate('Login')
+      return
+    }
+
+    const response: OrganizationData = await OrganizationService.getOrganization(authData.org_id)
+
+    setOrganization(response)
+  }
+
+  useEffect(() => {
+    fetchOrganizationData()
+  }, [])
 
   const handleCopyCode = () => {
-    console.log('copiar código:', mockOrganization.inviteCode)
+    Clipboard.setStringAsync(organization?.code || '')
   }
 
   return (
@@ -40,7 +63,7 @@ const OrganizationScreen: React.FC = () => {
 
           <View style={{ flex: 1 }}>
             <Text style={styles.label}>Nome da Organização</Text>
-            <Text style={styles.orgName}>{mockOrganization.name}</Text>
+            <Text style={styles.orgName}>{organization?.name}</Text>
           </View>
 
           <TouchableOpacity>
@@ -52,7 +75,7 @@ const OrganizationScreen: React.FC = () => {
           <Text style={styles.label}>Código de Convite</Text>
 
           <View style={styles.inviteRow}>
-            <Text style={styles.inviteCode}>{mockOrganization.inviteCode}</Text>
+            <Text style={styles.inviteCode}>{organization?.code}</Text>
 
             <TouchableOpacity style={styles.inviteButton} onPress={handleCopyCode}>
               <MaterialIcons name='content-copy' size={16} color='#fff' />

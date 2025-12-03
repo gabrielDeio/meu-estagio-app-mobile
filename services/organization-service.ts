@@ -6,4 +6,10 @@ export class OrganizationService {
 
     return response.data
   }
+
+  static async getOrganization(orgId: string) {
+    const response = await api.get(`/organization/${orgId}`)
+
+    return response.data
+  }
 }
