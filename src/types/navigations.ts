@@ -1,3 +1,5 @@
+import { RouteProp } from '@react-navigation/native'
+
 export type RootStackParamList = {
   WelcomeScreen: undefined
   RegisterUser: undefined
@@ -6,6 +8,11 @@ export type RootStackParamList = {
   ActivitiesScreen: undefined
   RegisterActivityScreen: undefined
   OrganizationScreen: undefined
+  StudentsScreen: undefined
+  EvaluateActivitiesScreen: {
+    username: string
+    userId: string
+  }
   Details: {
     id: string
     title?: string
@@ -21,3 +28,5 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
+
+export type EvaluateActivitiesRouteProp = RouteProp<RootStackParamList, 'EvaluateActivitiesScreen'>

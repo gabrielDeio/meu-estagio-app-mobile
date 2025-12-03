@@ -12,4 +12,10 @@ export class OrganizationService {
 
     return response.data
   }
+
+  static async getStudentsOrganization(orgId: string) {
+    const response = await api.get(`/organization/${orgId}/students`)
+
+    return response.data
+  }
 }

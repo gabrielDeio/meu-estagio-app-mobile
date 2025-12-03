@@ -11,7 +11,7 @@ import {
 import { MaterialIcons } from '@react-native-vector-icons/material-icons'
 import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/native'
 
-type SupervisorTabName = 'Home' | 'Estudantes' | 'Organização' | 'Perfil'
+type SupervisorTabName = 'Estudantes' | 'Organização' | 'Perfil'
 
 interface SupervisorTabItem {
   name: SupervisorTabName
@@ -20,7 +20,7 @@ interface SupervisorTabItem {
 }
 
 const SUPERVISOR_TABS: SupervisorTabItem[] = [
-  { name: 'Estudantes', icon: 'groups', route: 'SupervisorStudentsScreen' },
+  { name: 'Estudantes', icon: 'groups', route: 'StudentsScreen' },
   { name: 'Organização', icon: 'apartment', route: 'OrganizationScreen' },
   { name: 'Perfil', icon: 'person', route: 'SupervisorProfileScreen' },
 ]
@@ -61,25 +61,21 @@ const CustomSupervisorTabBar: React.FC<CustomSupervisorTabBarProps> = ({ activeT
 export default CustomSupervisorTabBar
 
 export const styles = StyleSheet.create({
-  // ... (seus outros estilos existentes) ...
-
-  // Estilos para o CustomSupervisorTabBar
   navBar: {
-    // Pode ser o mesmo que o anterior, ou renomear se precisar de diferenças
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: 60, // Ajuste a altura se precisar
-    backgroundColor: '#fff', // Cor de fundo
+    height: 60,
+    backgroundColor: '#fff',
     borderTopWidth: 1,
     borderTopColor: '#e0e0e0',
     paddingHorizontal: 8,
-    position: 'absolute', // Para fixar na parte inferior da tela
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    elevation: 4, // Sombra para Android
-    shadowColor: '#000', // Sombra para iOS
+    elevation: 4,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
@@ -88,25 +84,22 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 8, // Ajuste o padding
+    paddingVertical: 8,
   },
   navItemActive: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
-    // Estilo visual para o item ativo, se desejar
-    // backgroundColor: '#e9f5ff',
-    // borderRadius: 8,
   },
   navText: {
     fontSize: 12,
-    color: '#4A4A4A', // Cor do texto inativo
-    marginTop: 4, // Espaçamento entre ícone e texto
+    color: '#4A4A4A',
+    marginTop: 4,
   },
   navTextActive: {
     fontSize: 12,
-    color: '#1173d4', // Cor do texto ativo
+    color: '#1173d4',
     fontWeight: 'bold',
     marginTop: 4,
   },

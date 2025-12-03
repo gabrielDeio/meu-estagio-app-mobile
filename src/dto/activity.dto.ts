@@ -14,6 +14,7 @@ export interface Activity {
   start_time: string
   end_time: string
   approved_by?: string
+  created_at: string
 }
 
 export interface getAllActivitiesDto {

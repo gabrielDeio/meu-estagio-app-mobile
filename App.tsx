@@ -12,6 +12,8 @@ import { AuthProvider } from './src/contexts/auth-context'
 import ActivitiesScreen from './src/pages/activities-screen/activities-screen'
 import RegisterActivityScreen from './src/pages/create-activity-screen'
 import OrganizationScreen from './src/pages/organization-screen'
+import StudentsScreen from './src/pages/students-screen'
+import EvaluateActivitiesScreen from './src/pages/evaluate-activities-screen'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -27,6 +29,8 @@ export default function App() {
           <Stack.Screen name='ActivitiesScreen' component={ActivitiesScreen} />
           <Stack.Screen name='RegisterActivityScreen' component={RegisterActivityScreen} />
           <Stack.Screen name='OrganizationScreen' component={OrganizationScreen} />
+          <Stack.Screen name='StudentsScreen' component={StudentsScreen} />
+          <Stack.Screen name='EvaluateActivitiesScreen' component={EvaluateActivitiesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
