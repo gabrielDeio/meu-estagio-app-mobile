@@ -36,13 +36,17 @@ export default StyleSheet.create({
 
   profileBox: {
     alignItems: 'center',
-    paddingVertical: 24,
+    marginTop: 20,
   },
 
   avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 100,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#e5e7eb',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 12,
   },
 
   name: {

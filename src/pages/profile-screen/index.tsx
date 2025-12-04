@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import styles from './styles'
 import { useAuth } from '../../contexts/auth-context'
@@ -7,12 +7,49 @@ import { UserWithoutPassword } from '../../types/auth'
 import { useNavigation } from '@react-navigation/native'
 import { OrganizationService } from '../../../services/organization-service'
 import { OrganizationData } from '../organization-screen'
+import { AccountTypeEnum } from '../../dto/register-user.dto'
+import CustomTabBar from '../../components/custom-tab'
+import CustomSupervisorTabBar from '../../components/custom-supervisor-tab'
 
 export const ProfileScreen: React.FC = () => {
-  const { authData } = useAuth()
+  const { authData, signOut } = useAuth()
   const user = authData?.user
   const navigation = useNavigation()
   const [organization, setOrganization] = useState<OrganizationData>()
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Sair da Conta',
+      'Tem certeza que deseja fazer logout?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Sair',
+          style: 'destructive',
+          onPress: async () => {
+            signOut()
+            navigation.navigate('Login')
+          },
+        },
+      ],
+      { cancelable: true },
+    )
+  }
+
+  const renderTabBar = (userType: AccountTypeEnum | undefined) => {
+    if (!userType) {
+      navigation.navigate('Login')
+      return
+    }
+
+    if (userType === AccountTypeEnum.STUDENT) {
+      return <CustomTabBar activeTab='Perfil' />
+    }
+    return <CustomSupervisorTabBar activeTab='Perfil' />
+  }
 
   useEffect(() => {
     async function fetchOrganizationData() {
@@ -59,22 +96,6 @@ export const ProfileScreen: React.FC = () => {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Configurações da Conta</Text>
-
-          <View style={styles.card}>
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>Mudar Senha</Text>
-              <MaterialIcons name='chevron-right' size={22} color='#999' />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>Notificações</Text>
-              <MaterialIcons name='chevron-right' size={22} color='#999' />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.section}>
           <Text style={styles.sectionTitle}>Vínculo com a Organização</Text>
 
           <View style={styles.card}>
@@ -85,29 +106,12 @@ export const ProfileScreen: React.FC = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <Text style={styles.logoutText}>Sair</Text>
         </TouchableOpacity>
       </ScrollView>
 
-      <View style={styles.footer}>
-        <View style={styles.footerBar}>
-          <TouchableOpacity style={styles.footerItem}>
-            <MaterialIcons name='home' size={24} color='#666' />
-            <Text style={styles.footerText}>Home</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.footerItem}>
-            <MaterialIcons name='schedule' size={24} color='#666' />
-            <Text style={styles.footerText}>Atividades</Text>
-          </TouchableOpacity>
-
-          <View style={styles.footerItemActive}>
-            <MaterialIcons name='person' size={24} color='#1173d4' />
-            <Text style={styles.footerTextActive}>Perfil</Text>
-          </View>
-        </View>
-      </View>
+      {renderTabBar(authData?.user.type)}
     </View>
   )
 }
