@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@react-native-vector-icons/material-icons'
 import { useNavigation } from '@react-navigation/native'
@@ -8,6 +8,7 @@ import { useAuth } from '../../contexts/auth-context'
 import { ActivityService } from '../../../services/activity-service'
 import CustomTabBar from '../../components/custom-tab'
 import { ActivityDateField } from '../../components/activity-date-field'
+import { ReportService } from '../../../services/report-service'
 
 export default function ActivitiesScreen() {
   const navigation = useNavigation()
@@ -29,9 +30,30 @@ export default function ActivitiesScreen() {
       initialDate: startDate,
       endDate,
     }
-
     const response = await ActivityService.getAllActivities(payload)
     setActivities(response)
+  }
+
+  const handleGenerateReport = async () => {
+    if (!startDate && !endDate) {
+      Alert.alert(
+        'Erro',
+        'Por favor, selecione uma data inicial e uma data final para gerar o relatório.',
+      )
+      return
+    }
+
+    if (!authData) {
+      navigation.navigate('Login')
+      return
+    }
+
+    await ReportService.generateReport({
+      orgId: authData?.org_id,
+      userId: authData?.user.id,
+      initialDate: startDate,
+      endDate,
+    })
   }
 
   useEffect(() => {
@@ -68,9 +90,7 @@ export default function ActivitiesScreen() {
           <Text style={styles.registerButtonText}>Registrar Nova Atividade</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.reportButton}
-          onPress={() => console.log('Generate Report')}>
+        <TouchableOpacity style={styles.reportButton} onPress={() => handleGenerateReport()}>
           <MaterialIcons name='insert-chart' size={22} color='#1173d4' />
           <Text style={styles.reportButtonText}>Gerar Relatório de Atividades</Text>
         </TouchableOpacity>
