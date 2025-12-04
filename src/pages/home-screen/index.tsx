@@ -52,28 +52,6 @@ export default function HomeScreen() {
     }
   }
 
-  const handleLogout = () => {
-    Alert.alert(
-      'Sair da Conta',
-      'Tem certeza que deseja fazer logout?',
-      [
-        {
-          text: 'Cancelar',
-          style: 'cancel',
-        },
-        {
-          text: 'Sair',
-          style: 'destructive',
-          onPress: async () => {
-            signOut()
-            navigation.navigate('Login')
-          },
-        },
-      ],
-      { cancelable: true },
-    )
-  }
-
   const updateMetrics = async () => {
     if (!authData) {
       navigation.navigate('Login')
@@ -109,10 +87,6 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Home</Text>
-
-        <TouchableOpacity style={styles.settingsButton}>
-          <MaterialIcons name='logout' size={28} color='#000' onPress={() => handleLogout()} />
-        </TouchableOpacity>
       </View>
 
       <ScrollView style={styles.main} contentContainerStyle={{ paddingBottom: 20 }}>
