@@ -3,7 +3,10 @@ import * as Sharing from 'expo-sharing'
 import { api } from './api'
 import { getAllActivitiesDto } from '../src/dto/activity.dto'
 
-interface generateReportDto extends getAllActivitiesDto {}
+interface generateReportDto extends getAllActivitiesDto {
+  initialDate: string
+  endDate: string
+}
 
 export class ReportService {
   static async generateReport(payload: generateReportDto) {

@@ -8,11 +8,12 @@ import { api } from './api'
 
 export class ActivityService {
   static async getAllActivities(payload: getAllActivitiesDto): Promise<Array<Activity>> {
-    const { userId, orgId, initialDate, endDate } = payload
-    if (!payload.initialDate && !payload.endDate) {
-      const response = await api.get(`/activity/${orgId}/user/${userId}`)
-
-      return response.data
+    let { userId, orgId, initialDate, endDate } = payload
+    if (!initialDate) {
+      initialDate = ''
+    }
+    if (!endDate) {
+      endDate = ''
     }
     const queryParams = {
       initial_date: initialDate !== '' ? new Date(initialDate).toISOString() : undefined,
