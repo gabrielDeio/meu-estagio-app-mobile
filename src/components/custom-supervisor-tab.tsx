@@ -22,7 +22,7 @@ interface SupervisorTabItem {
 const SUPERVISOR_TABS: SupervisorTabItem[] = [
   { name: 'Estudantes', icon: 'groups', route: 'StudentsScreen' },
   { name: 'Organização', icon: 'apartment', route: 'OrganizationScreen' },
-  { name: 'Perfil', icon: 'person', route: 'SupervisorProfileScreen' },
+  { name: 'Perfil', icon: 'person', route: 'ProfileScreen' },
 ]
 
 interface CustomSupervisorTabBarProps {

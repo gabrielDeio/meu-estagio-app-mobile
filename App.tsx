@@ -14,6 +14,7 @@ import RegisterActivityScreen from './src/pages/create-activity-screen'
 import OrganizationScreen from './src/pages/organization-screen'
 import StudentsScreen from './src/pages/students-screen'
 import EvaluateActivitiesScreen from './src/pages/evaluate-activities-screen'
+import ProfileScreen from './src/pages/profile-screen'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -31,6 +32,7 @@ export default function App() {
           <Stack.Screen name='OrganizationScreen' component={OrganizationScreen} />
           <Stack.Screen name='StudentsScreen' component={StudentsScreen} />
           <Stack.Screen name='EvaluateActivitiesScreen' component={EvaluateActivitiesScreen} />
+          <Stack.Screen name='ProfileScreen' component={ProfileScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>

@@ -9,6 +9,7 @@ export type RootStackParamList = {
   RegisterActivityScreen: undefined
   OrganizationScreen: undefined
   StudentsScreen: undefined
+  ProfileScreen: undefined
   EvaluateActivitiesScreen: {
     username: string
     userId: string

@@ -9,6 +9,7 @@ export interface LoginDto {
 export interface UserLoginReponseDto {
   id: string
   name: string
+  surname: string
   email: string
   type: AccountTypeEnum
 }

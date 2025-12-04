@@ -17,7 +17,7 @@ export interface UserWithoutPassword {
 
 export interface AuthData {
   token: string
-  user: User
+  user: UserWithoutPassword
   org_id: string
 }
 
